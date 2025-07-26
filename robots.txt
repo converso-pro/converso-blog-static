@@ -1,0 +1,34 @@
+# Robots.txt for blog.converso.pro
+# Generated automatically by Converso Blog System
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+# Sitemaps
+Sitemap: https://blog.converso.pro/sitemap.xml
+Sitemap: https://blog.converso.pro/sitemap-en.xml
+Sitemap: https://blog.converso.pro/sitemap-pt.xml
+Sitemap: https://blog.converso.pro/sitemap-es.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Specific bot rules for better SEO
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 0
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
