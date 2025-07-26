@@ -838,10 +838,11 @@ Ao passo que as negociações comerciais entre a União Europeia (UE) e os Estad
             <section class="sidebar-section newsletter neumorphic-card">
                 <h3>Assine nossa Newsletter</h3>
                 <p>Receba as últimas dicas e insights em seu email</p>
-                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Em breve!')">
-                    <input type="email" class="newsletter-input" placeholder="Seu endereço de email" required>
-                    <button type="submit" class="newsletter-button">Assinar</button>
+                <form class="newsletter-form" id="newsletter-form" onsubmit="return handleNewsletterSubmit(event)">
+                    <input type="email" class="newsletter-input" id="newsletter-email" placeholder="Seu endereço de email" required>
+                    <button type="submit" class="newsletter-button" id="newsletter-btn">Assinar</button>
                 </form>
+                <div id="newsletter-message" style="margin-top: 10px; text-align: center; font-size: 14px; display: none;"></div>
             </section>
         </aside>
     </div>
@@ -851,5 +852,79 @@ Ao passo que as negociações comerciais entre a União Europeia (UE) e os Estad
             <p>&copy; 2025 Converso. Todos os direitos reservados.</p>
         </div>
     </footer>
+
+    <script>
+    async function handleNewsletterSubmit(event) {
+        event.preventDefault();
+        
+        const form = document.getElementById('newsletter-form');
+        const email = document.getElementById('newsletter-email').value;
+        const button = document.getElementById('newsletter-btn');
+        const messageDiv = document.getElementById('newsletter-message');
+        
+        // Disable form while submitting
+        button.disabled = true;
+        button.textContent = 'Enviando...';
+        
+        try {
+            const response = await fetch('https://dgyolxkvibcwvxgwnyks.supabase.co/functions/v1/converso-newsletter', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: email,
+                    source: 'blog',
+                    source_url: window.location.href,
+                    language: 'pt',
+                    utm_source: new URLSearchParams(window.location.search).get('utm_source') || undefined,
+                    utm_medium: new URLSearchParams(window.location.search).get('utm_medium') || undefined,
+                    utm_campaign: new URLSearchParams(window.location.search).get('utm_campaign') || undefined,
+                    utm_term: new URLSearchParams(window.location.search).get('utm_term') || undefined,
+                    utm_content: new URLSearchParams(window.location.search).get('utm_content') || undefined
+                })
+            });
+            
+            if (response.ok) {
+                // Success
+                messageDiv.style.color = '#22c55e';
+                messageDiv.textContent = '✓ Inscrição realizada com sucesso!';
+                messageDiv.style.display = 'block';
+                form.reset();
+                
+                // Track conversion
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'newsletter_signup', {
+                        event_category: 'engagement',
+                        event_label: 'blog_newsletter',
+                        value: 1
+                    });
+                }
+            } else {
+                // Error
+                const data = await response.json();
+                messageDiv.style.color = '#ef4444';
+                messageDiv.textContent = '✗ Erro ao inscrever. Tente novamente.';
+                messageDiv.style.display = 'block';
+            }
+        } catch (error) {
+            console.error('Newsletter error:', error);
+            messageDiv.style.color = '#ef4444';
+            messageDiv.textContent = '✗ Erro de conexão. Tente novamente.';
+            messageDiv.style.display = 'block';
+        } finally {
+            // Re-enable form
+            button.disabled = false;
+            button.textContent = 'Assinar';
+            
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 5000);
+        }
+        
+        return false;
+    }
+    </script>
 </body>
 </html>
