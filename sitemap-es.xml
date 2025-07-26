@@ -3,13 +3,19 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://blog.converso.pro/blog/es/</loc>
-    <lastmod>2025-07-26T02:21:04.515Z</lastmod>
+    <lastmod>2025-07-26T02:58:19.793Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://blog.converso.pro/blog/es/tesla-plans-to-launch-robotaxis-in-san-francisco-this-weekend-business-insider-reports-reuters/</loc>
-    <lastmod>2025-07-26T02:11:16.650434+00:00</lastmod>
+    <loc>https://blog.converso.pro/blog/es/do-not-download-the-app-use-the-website/</loc>
+    <lastmod>2025-07-26T02:58:06.324128+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://blog.converso.pro/blog/es/claude-code-introduces-specialized-sub-agents/</loc>
+    <lastmod>2025-07-26T02:58:12.770795+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
