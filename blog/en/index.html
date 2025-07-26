@@ -73,8 +73,26 @@
             align-items: center;
         }
         
-        .logo img {
-            height: 40px;
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.75rem;
+        }
+        
+        .logo-text {
+            background: linear-gradient(135deg, #22c55e 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+        
+        .logo-blog {
+            color: #4a5568;
+            font-weight: 300;
+            margin-left: 0.5rem;
         }
         
         .nav-links {
@@ -559,8 +577,9 @@
 <body>
     <nav class="navbar">
         <div class="container">
-            <a href="https://converso.pro" class="logo">
-                <img src="https://converso.pro/converso.svg" alt="Converso">
+            <a href="https://blog.converso.pro" class="logo">
+                <span class="logo-text">Converso</span>
+                <span class="logo-blog">Blog</span>
             </a>
             <div class="nav-links">
                 <a href="https://converso.pro">Home</a>
